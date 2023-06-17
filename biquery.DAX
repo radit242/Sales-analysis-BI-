@@ -1,0 +1,23 @@
+
+sales quantity = SUM('public transactions'[sales_qty]) 
+
+Total Renevue = sum('public transactions'[sales_amount])
+
+MonthYear = FORMAT('public date'[dates], "mmm yyyy")
+
+Current Month sale = 
+CALCULATE(
+    SUM('public transactions'[Revenue ]))
+
+date = PARALLELPERIOD('public date'[MonthYear],0,MONTH)
+
+month = month('public transactions'[date])
+
+PreviousMonthSales = 
+    CALCULATE(
+        [Current Month sale],
+        DATEADD('public date'[dates], -1, MONTH)
+        
+    )
+
+change = [Current Month sale] - [PreviousMonthSales]
